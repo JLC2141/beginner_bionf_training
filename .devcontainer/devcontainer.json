@@ -4,7 +4,7 @@
 	"name": "MDHHS bioinformatics beginner tutorial .devcontainer",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "Dockerfile"
 	},
 	"workspaceFolder": "/workspace",
 	"remoteUser": "vscode",
