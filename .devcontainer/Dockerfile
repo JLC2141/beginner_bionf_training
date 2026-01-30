@@ -21,14 +21,13 @@ LABEL maintainer3="Pooja Gupta"
 LABEL maintainer3.email="biopooja@gmail.com"
 
 # install dependencies; cleanup apt garbage
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends locales \
     unzip \
     wget \
     perl \
     default-jre \
     ca-certificates \
     locale-gen en_US.UTF-8 \
-    update-locale LANG=en_US.UTF-8 \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -44,8 +43,8 @@ RUN useradd -m -s /bin/bash vscode
 
 # set PATH and working directory
 ENV PATH="${PATH}:/FastQC/"
-ENV LANG=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
-
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
 #WORKDIR /data
 WORKDIR /workspace
