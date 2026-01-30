@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${FASTQC_VER}.zip && \
     unzip fastqc_v${FASTQC_VER}.zip && \
     rm fastqc_v${FASTQC_VER}.zip && \
-    chmod +x FastQC/fastqc && \
+    chmod +x FastQC/fastqc &&
     #mkdir /data
 
 # set PATH and working directory
