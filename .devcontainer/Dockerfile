@@ -31,12 +31,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 
-# install fastqc. Make /data for use as a working dir
+# install fastqc
 RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${FASTQC_VER}.zip && \
     unzip fastqc_v${FASTQC_VER}.zip && \
     rm fastqc_v${FASTQC_VER}.zip && \
     chmod +x FastQC/fastqc
-    #mkdir /data
+    
+#install fastp
+RUN wget http://opengene.org/fastp/fastp.0.23.4 \
+    mv fastp.0.23.4 fastp \
+    chmod a+x ./fastp
 
 RUN useradd -m -s /bin/bash vscode 
 
