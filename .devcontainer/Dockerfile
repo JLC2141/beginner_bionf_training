@@ -21,14 +21,12 @@ LABEL maintainer3="Pooja Gupta"
 LABEL maintainer3.email="biopooja@gmail.com"
 
 # install dependencies; cleanup apt garbage
-RUN apt-get update && apt-get install -y --no-install-recommends locales \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     wget \
     perl \
     default-jre \
     ca-certificates \
-    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -47,6 +45,6 @@ ENV PATH="${PATH}:/FastQC/"
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
-    
+
 #WORKDIR /data
 WORKDIR /workspace
