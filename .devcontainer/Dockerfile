@@ -3,8 +3,6 @@
 FROM ubuntu:focal as app
 
 ARG FASTQC_VER="0.12.1"
-ARG FASTP_VER="1.0.1"
-ARG ISAL_VER="2.31.1"
 
 # metadata
 LABEL base.image="ubuntu:focal"
@@ -24,18 +22,9 @@ LABEL maintainer3.email="biopooja@gmail.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     unzip \
     wget \
     perl \
-    make \
-    libdeflate-dev \
-    autoconf \
-    automake \
-    libtool \
-    nasm \
-    yasm \
-    help2man \
     default-jre \
     ca-certificates \
     procps && \
@@ -48,26 +37,6 @@ RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${FAS
     rm fastqc_v${FASTQC_VER}.zip && \
     chmod +x FastQC/fastqc
     #mkdir /data
-
-RUN wget https://github.com/intel/isa-l/archive/refs/tags/v${ISAL_VER}.tar.gz &&\
-    tar -xvf v${ISAL_VER}.tar.gz &&\
-    cd isa-l-${ISAL_VER} &&\
-    ./autogen.sh &&\
-    ./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu &&\
-    make && make install
-
-# Note: Use static to include isa-l & libdeflate
-RUN wget https://github.com/OpenGene/fastp/archive/refs/tags/v${FASTP_VER}.tar.gz &&\
-    tar -xvf v${FASTP_VER}.tar.gz &&\
-    cd fastp-${FASTP_VER} &&\
-    make static LIBRARY_DIRS=/usr/lib/x86_64-linux-gnu &&\
-    make install
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    jq &&\
-    apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-COPY --from=builder /usr/local/bin/fastp /usr/local/bin/fastp
 
 RUN useradd -m -s /bin/bash vscode 
 
