@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends locales \
     perl \
     default-jre \
     ca-certificates \
-    locale-gen en_US.UTF-8 \
+    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -46,5 +47,6 @@ ENV PATH="${PATH}:/FastQC/"
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
+    
 #WORKDIR /data
 WORKDIR /workspace
