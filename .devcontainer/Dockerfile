@@ -28,7 +28,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     default-jre \
     ca-certificates \
     procps && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+    apt-get autoclean && rm -rf /var/lib/apt/lists/* \
+    && locale-gen en_US.UTF-8 \
+    && update-locale LANG=en_US.UTF-8
+
 
 # install fastqc. Make /data for use as a working dir
 RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${FASTQC_VER}.zip && \
@@ -41,5 +44,8 @@ RUN useradd -m -s /bin/bash vscode
 
 # set PATH and working directory
 ENV PATH="${PATH}:/FastQC/"
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
 #WORKDIR /data
 WORKDIR /workspace
