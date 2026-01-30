@@ -37,6 +37,8 @@ RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${FAS
     chmod +x FastQC/fastqc
     #mkdir /data
 
+RUN useradd -m -s /bin/bash vscode 
+
 # set PATH and working directory
 ENV PATH="${PATH}:/FastQC/"
 #WORKDIR /data
