@@ -27,10 +27,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     perl \
     default-jre \
     ca-certificates \
+    locale-gen en_US.UTF-8 \
+    update-locale LANG=en_US.UTF-8 \
     procps && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/* \
-    && locale-gen en_US.UTF-8 \
-    && update-locale LANG=en_US.UTF-8
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 
 # install fastqc. Make /data for use as a working dir
