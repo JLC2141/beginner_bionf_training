@@ -40,7 +40,7 @@ RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${FAS
 #install fastp
 RUN wget http://opengene.org/fastp/fastp.0.23.4 && \
     mv fastp.0.23.4 fastp && \
-    chmod a+x ./fastp \
+    chmod a+x ./fastp && \
     mv ./fastp /usr/local/bin/
 
 RUN useradd -m -s /bin/bash vscode 
