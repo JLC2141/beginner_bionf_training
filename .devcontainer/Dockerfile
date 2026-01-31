@@ -4,6 +4,7 @@ FROM ubuntu:focal as app
 
 ARG FASTQC_VER="0.12.1"
 ARG SPADES_VER="4.2.0"
+ARG SRATOOLKIT_VER="3.3.0"
 
 # metadata
 LABEL base.image="ubuntu:focal"
@@ -54,13 +55,19 @@ RUN wget -q https://github.com/ablab/spades/releases/download/v${SPADES_VER}/SPA
     tar -xzf SPAdes-${SPADES_VER}-Linux.tar.gz && \
     rm -r SPAdes-${SPADES_VER}-Linux.tar.gz
 
+#install SRAtoolkit
+RUN wget -q https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/${SRATOOLKIT_VER}/sratoolkit.${SRATOOLKIT_VER}-ubuntu64.tar.gz &&\
+    tar -xvf sratoolkit.${SRATOOLKIT_VER}-ubuntu64.tar.gz && rm sratoolkit.${SRATOOLKIT_VER}-ubuntu64.tar.gz
+
+
 RUN useradd -m -s /bin/bash vscode 
 
-CMD ["spades.py", "--help"]
+#CMD ["spades.py", "--help"]
 
 # set PATH and working directory
 ENV PATH="${PATH}:/FastQC/"
 ENV PATH="${PATH}:/SPAdes-${SPADES_VER}-Linux/bin"
+ENV PATH="$PATH:/sratoolkit.${SRATOOLKIT_VER}-ubuntu64/bin"
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
