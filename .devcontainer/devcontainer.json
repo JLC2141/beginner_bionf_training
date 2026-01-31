@@ -15,7 +15,7 @@
 			]
 		}
 	},
-	"postCreateCommand": "bash fastqc --version && bash fastp --version && bash spades.py --version && bash ./requirements.txt"
+	"postCreateCommand": "./requirements.sh"
 }
 	
 
