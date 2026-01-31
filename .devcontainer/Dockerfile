@@ -4,6 +4,7 @@ FROM ubuntu:focal as app
 
 ARG FASTQC_VER="0.12.1"
 ARG SPADES_VER="4.2.0"
+ARG MULTIQC_VER="1.33"
 ARG SRATOOLKIT_VER="3.3.0"
 
 # metadata
@@ -26,6 +27,7 @@ LABEL maintainer3.email="biopooja@gmail.com"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-distutils \
+    python3-pip \
     wget \
     pigz \
     unzip \
@@ -54,6 +56,9 @@ RUN wget http://opengene.org/fastp/fastp.0.23.4 && \
 RUN wget -q https://github.com/ablab/spades/releases/download/v${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz && \
     tar -xzf SPAdes-${SPADES_VER}-Linux.tar.gz && \
     rm -r SPAdes-${SPADES_VER}-Linux.tar.gz
+
+#install multiqc
+RUN pip3 install --no-cache-dir multiqc==${MULTIQC_VER}
 
 #install SRAtoolkit
 RUN wget -q https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/${SRATOOLKIT_VER}/sratoolkit.${SRATOOLKIT_VER}-ubuntu64.tar.gz &&\
