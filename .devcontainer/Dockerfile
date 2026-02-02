@@ -10,18 +10,11 @@ ARG SRATOOLKIT_VER="3.3.0"
 # metadata
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
-LABEL software="FASTQC"
-LABEL software.version="${FASTQC_VER}"
-LABEL description="A quality control analysis tool for high throughput sequencing data"
-LABEL website="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
-LABEL website.code.repo="https://github.com/s-andrews/FastQC/"
-LABEL license="https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt"
-LABEL maintainer="Abigail Shockey"
-LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
-LABEL maintainer2="Curtis Kapsak"
-LABEL maintainer2.email="kapsakcj@gmail.com"
-LABEL maintainer3="Pooja Gupta"
-LABEL maintainer3.email="biopooja@gmail.com"
+LABEL software="FASTQC + fastp + SPAdes + MultiQC + SRAtoolkit"
+LABEL description="A tutorial pipeline for QC, trimming, and assembly of Illumina paired-end reads"
+LABEL maintainer="John Chodkowski"
+LABEL maintainer.email="chodkowskij@michigan.gov"
+
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
