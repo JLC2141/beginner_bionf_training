@@ -1,6 +1,7 @@
 # FROM defines the base docker image. 
 # The 'as' keyword lets you name the following stage. We use `app` for the production image
-FROM ubuntu:focal as app
+#FROM ubuntu:focal as app
+FROM ubuntu:jammy  
 
 ARG FASTQC_VER="0.12.1"
 ARG SPADES_VER="4.2.0"
@@ -8,7 +9,8 @@ ARG MULTIQC_VER="1.33"
 ARG SRATOOLKIT_VER="3.3.0"
 
 # metadata
-LABEL base.image="ubuntu:focal"
+#LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="FASTQC + fastp + SPAdes + MultiQC + SRAtoolkit"
 LABEL description="A tutorial pipeline for QC, trimming, and assembly of Illumina paired-end reads"
